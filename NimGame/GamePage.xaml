@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NimGame.GamePage"
+             Title="GamePage">
+
+    <Grid BackgroundColor="White">
+        <VerticalStackLayout BackgroundColor="OrangeRed">
+            <Label 
+        TextColor="Black"
+        Text="Welcome to .NET MAUI!"
+        VerticalOptions="Center" 
+        HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout>
+            <Button Text="Title Page" Clicked="TitlePage" />
+            <Button Text="How to Play" Clicked="HowToPlay" />
+            <Button Text="Exit Game" Clicked ="ExitGame" />
+            <Button Text="New Game" Clicked="NewGame"/>
+            <Button Text="Pass Turn" Clicked="PassTurn" />
+            <Button Text="Row 1" Clicked="Row1" />
+            <Button Text="Row 2" Clicked="Row2" />
+            <Button Text="Row 3" Clicked="Row3" />
+            <Button Text="Row 4" Clicked="Row4" />
+            <Button Text="Row 5" Clicked="Row5" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
