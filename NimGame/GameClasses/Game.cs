@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +14,8 @@ namespace NimGame.GameClasses
 
         public Game(GameDifficulty difficulty, string player1Name, string player2Name = "CPU", bool isPvC = false, Players.CPUDifficulty cpu_difficulty = Players.CPUDifficulty.MEDIUM)
         {
+            Console.WriteLine("Creating Game");
+
             gameDifficulty = difficulty;
             gameBoard = new Board((int)gameDifficulty);
 
@@ -28,12 +32,12 @@ namespace NimGame.GameClasses
 
             Random random = new Random();
             currentPlayer = random.Next(2);
+            players[currentPlayer].TakeTurn(ref gameBoard);
         }
 
         public void UpdateBoard(int row)
         {
-            gameBoard.UpdateRow(row);
-            playerActed = true;
+            if (gameBoard.UpdateRow(row)) playerActed = true;
         }
 
         public void SwitchPlayer()
@@ -42,6 +46,8 @@ namespace NimGame.GameClasses
             {
                 currentPlayer = (currentPlayer == 0) ? 1 : 0;
                 playerActed = false;
+                gameBoard.DeselectRow();
+                Console.WriteLine("Passing Turn");
                 if (isPvC && currentPlayer == 1)
                 {
                     players[1].TakeTurn(ref gameBoard);
@@ -54,6 +60,7 @@ namespace NimGame.GameClasses
             if (gameBoard.IsEmpty())
             {
                 Winner = (currentPlayer == 0) ? players[1].PlayerName : players[0].PlayerName;
+                Console.WriteLine($"{Winner} Wins!");
                 return true;
             }
 
@@ -81,15 +88,31 @@ namespace NimGame.GameClasses
         public Board(int rowCount)
         {
             Rows = new int[rowCount];
+            int rowTotal = 1;
+            if (rowCount == 5)
+            {
+                rowTotal = 3;
+            }
+            for (int i = 0; i < rowCount; i++)
+            {
+                Rows[i] = rowTotal;
+                rowTotal += 2;
+            }
         }
 
-        public void UpdateRow(int row)
+        public bool UpdateRow(int row)
         {
+            if (row + 1 > Rows.Length) return false;
+
             if ((row == selectedRow || selectedRow == -1) && Rows[row] > 0)
             {
                 selectedRow = row;
                 Rows[row]--;
+                Console.WriteLine($"Row {row} has {Rows[row]} stones remaining");
+                return true;
             }
+
+            return false;
         }
 
         public void DeselectRow() { selectedRow = -1; }
