@@ -2,24 +2,29 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void SettingPage(object sender, EventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            if (Application.Current != null)
+            {
+                Application.Current.MainPage = new SettingsPage();
+            }
+        }
+        private void HowToPlay(object sender, EventArgs e)
+        {
+            if (Application.Current != null)
+            {
+                Application.Current.MainPage = new HowToPlay();
+            }
+        }
+        private void ExitGame(object sender, EventArgs e)
+        {
+            
         }
     }
-
 }
