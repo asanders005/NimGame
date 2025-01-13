@@ -43,11 +43,62 @@ namespace NimGame.GameClasses.Players
 
         override public void TakeTurn(ref Board board)
         {
+            int targetRow = -1;
+            int targetNumber = 0;
             switch (difficulty)
             {
                 case CPUDifficulty.EASY:
+                    targetRow = rand.Next(board.Rows.Length);
+                    targetNumber = rand.Next(4);
+                    for (int i = 0; i < targetNumber; i++)
+                    {
+                        board.UpdateRow(targetRow);
+                    }
                     break;
                 case CPUDifficulty.MEDIUM:
+                    foreach (var rowCount in board.Rows)
+                    {
+                        if ((rowCount & 0b0001) != 0)
+                        {
+                            nimSumCounts[3]++;
+                        }
+                        if ((rowCount & 0b0010) != 0)
+                        {
+                            nimSumCounts[2]++;
+                        }
+                        if ((rowCount & 0b0100) != 0)
+                        {
+                            nimSumCounts[1]++;
+                        }
+                        if ((rowCount & 0b1000) != 0)
+                        {
+                            nimSumCounts[0]++;
+                        }
+                    }
+                    for (int i = 0; i < nimSumCounts.Length; i++)
+                    {
+                        if (nimSumCounts[i] % 2 == 1 && !nimSumAchievable)
+                        {
+                            nimSumAchievable = true;
+                            targetNumber = (int)Math.Pow(2, i);
+                        }
+                        else
+                        {
+                            nimSumAchievable = false;
+                        }
+                    }
+                    targetRow = rand.Next(board.Rows.Length);
+                    if (nimSumAchievable)
+                    {
+                        for(int i = 0; i < targetNumber; i++)
+                        {
+                            board.UpdateRow(targetRow);
+                        }
+                    }
+                    else
+                    {
+                        board.UpdateRow(targetRow);
+                    }
                     break;
                 case CPUDifficulty.HARD:
                     foreach (var rowCount in board.Rows) 
@@ -67,6 +118,18 @@ namespace NimGame.GameClasses.Players
                         if ((rowCount & 0b1000) != 0)
                         {
                             nimSumCounts[0]++;
+                        }
+                    }
+                    for (int i = 0; i < nimSumCounts.Length; i++)
+                    {
+                        if (nimSumCounts[i] % 2 == 1 && !nimSumAchievable)
+                        {
+                            nimSumAchievable = true;
+                            targetNumber = (int)Math.Pow(2, i);
+                        }
+                        else
+                        {
+                            nimSumAchievable = false;
                         }
                     }
                     break;
