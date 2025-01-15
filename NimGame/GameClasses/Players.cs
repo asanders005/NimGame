@@ -43,14 +43,23 @@ namespace NimGame.GameClasses.Players
 
         override public void TakeTurn(ref Board board)
         {
+            int targetRow = 0;
+            int targetNumber = 0;
             switch (difficulty)
             {
                 case CPUDifficulty.EASY:
+                    do
+                    {
+                        targetRow = rand.Next(board.Rows.Length);
+                    } while (board.Rows[targetRow] == 0);
+                    targetNumber = rand.Next(4);
+                    for (int i = 0; i < targetNumber; i++)
+                    {
+                        board.UpdateRow(targetRow);
+                    }
                     break;
                 case CPUDifficulty.MEDIUM:
-                    break;
-                case CPUDifficulty.HARD:
-                    foreach (var rowCount in board.Rows) 
+                    foreach (var rowCount in board.Rows)
                     {
                         if ((rowCount & 0b0001) != 0)
                         {
@@ -69,8 +78,89 @@ namespace NimGame.GameClasses.Players
                             nimSumCounts[0]++;
                         }
                     }
+                    for (int i = 0; i < nimSumCounts.Length; i++)
+                    {
+                        if (nimSumCounts[i] % 2 == 1 && !nimSumAchievable)
+                        {
+                            nimSumAchievable = true;
+                            targetNumber = (int)Math.Pow(2, i);
+                        }
+                        else
+                        {
+                            nimSumAchievable = false;
+                        }
+                    }
+                    do
+                    {
+                        targetRow = rand.Next(board.Rows.Length);
+                    } while (board.Rows[targetRow] == 0);
+                    if (nimSumAchievable)
+                    {
+                        for(int i = 0; i < targetNumber; i++)
+                        {
+                            board.UpdateRow(targetRow);
+                        }
+                    }
+                    else
+                    {
+                        board.UpdateRow(targetRow);
+                    }
+                    break;
+                case CPUDifficulty.HARD:
+                    if (CheckWinningPosition(board.Rows))
+                    {
+                        do
+                        {
+                            targetRow = rand.Next(board.Rows.Length);
+                        }
+                        while (board.Rows[targetRow] == 0);
+                        board.UpdateRow(targetRow);
+                    }
+                    else
+                    {
+                        bool winningPos = false;
+                        while (!winningPos)
+                        {
+                            int[] tempRows = board.Rows;
+                            targetRow %= board.Rows.Length;
+                            while (board.Rows[targetRow] == 0) targetRow = (targetRow + 1) % board.Rows.Length;
+
+                            int tempCount = tempRows[targetRow];
+                            while (!CheckWinningPosition(tempRows) && tempRows[targetRow] != 0) tempRows[targetRow]--;
+
+                            if (!CheckWinningPosition(tempRows)) tempRows[targetRow] = tempCount;
+                            else
+                            {
+                                board.UpdateRow(targetRow, tempRows[targetRow]);
+                                winningPos = true;
+                            }
+                        }
+                    }
                     break;
             }
+        }
+
+        private bool CheckWinningPosition(int[] rows)
+        {
+            bool match = false;
+            bool oneLeft = false;
+            switch (rows.Length)
+            {
+                case 3:
+                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    return match ^ oneLeft;
+                case 4:
+                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    return match ^ oneLeft;
+                case 5:
+                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    return match ^ oneLeft;
+            }
+
+            return false;
         }
 
         private CPUDifficulty difficulty;

@@ -115,6 +115,15 @@ namespace NimGame.GameClasses
             return false;
         }
 
+        public void UpdateRow(int row, int count)
+        {
+            if ((row == selectedRow || selectedRow == -1) && Rows[row] > 0 && count < Rows[row])
+            {
+                selectedRow = row;
+                Rows[row] = count;
+            }
+        }
+
         public void DeselectRow() { selectedRow = -1; }
 
         public bool IsEmpty()
