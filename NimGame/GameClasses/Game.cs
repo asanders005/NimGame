@@ -11,74 +11,88 @@ namespace NimGame.GameClasses
     public class Game
     {
         public string? Winner { get; private set; }
+        public int CurrentPlayer { get; private set; }
+        public Players.Player[] Players { get; private set; } = new Players.Player[2];
+        public bool GameOver { get; private set; }
 
-        public Game(GameDifficulty difficulty, string player1Name, string player2Name = "CPU", bool isPvC = false, Players.CPUDifficulty cpu_difficulty = Players.CPUDifficulty.MEDIUM)
+        public Game(GameDifficulty difficulty, string player1Name, string player2Name = "CPU", bool isPvC = false, Players.CPUDifficulty cpu_difficulty = GameClasses.Players.CPUDifficulty.MEDIUM)
         {
             Console.WriteLine("Creating Game");
 
             gameDifficulty = difficulty;
-            gameBoard = new Board((int)gameDifficulty);
+            GameBoard = new Board((int)gameDifficulty);
 
-            players[0] = new Players.Player(player1Name);
+            Players[0] = new Players.Player(player1Name, this);
             if (isPvC)
             {
                 this.isPvC = true;
-                players[1] = new Players.CPU(cpu_difficulty);
+                Players[1] = new Players.CPU(cpu_difficulty, this);
             }
             else
             {
-                players[1] = new Players.Player(player2Name);
+                Players[1] = new Players.Player(player2Name, this);
             }
 
             Random random = new Random();
-            currentPlayer = random.Next(2);
-            if (isPvC && currentPlayer == 1)
+            CurrentPlayer = random.Next(2);
+            if (isPvC && CurrentPlayer == 1)
             {
-                players[currentPlayer].TakeTurn(ref gameBoard);
+                Players[CurrentPlayer].TakeTurn();
                 SwitchPlayer();
             }
         }
 
-        public void UpdateBoard(int row)
+        public bool UpdateBoard(int row)
         {
-            if (gameBoard.UpdateRow(row)) playerActed = true;
+            if (!GameOver)
+            {
+                if (GameBoard.UpdateRow(row))
+                {
+                    playerActed = true;
+                    return true;
+                }
+            }
+            CheckWinner();
+            return false;
         }
 
         public void SwitchPlayer()
         {
-            if (playerActed)
+            if (!GameOver)
             {
-                currentPlayer = (currentPlayer == 0) ? 1 : 0;
-                playerActed = false;
-                gameBoard.DeselectRow();
-                Console.WriteLine("Passing Turn");
-                if (isPvC && currentPlayer == 1)
+                if (playerActed)
                 {
-                    players[1].TakeTurn(ref gameBoard);
-                    playerActed = true;
-                    SwitchPlayer();
+                    CurrentPlayer = (CurrentPlayer == 0) ? 1 : 0;
+                    playerActed = false;
+                    GameBoard.DeselectRow();
+                    Console.WriteLine("Passing Turn");
+                    if (isPvC && CurrentPlayer == 1)
+                    {
+                        Players[1].TakeTurn();
+                        playerActed = true;
+                        SwitchPlayer();
+                    }
                 }
             }
         }
 
         public bool CheckWinner()
         {
-            if (gameBoard.IsEmpty())
+            if (GameBoard.IsEmpty())
             {
-                Winner = (currentPlayer == 0) ? players[1].PlayerName : players[0].PlayerName;
+                Winner = (CurrentPlayer == 0) ? Players[1].PlayerName : Players[0].PlayerName;
                 Console.WriteLine($"{Winner} Wins!");
+                GameOver = true;
                 return true;
             }
 
             return false;
         }
 
-        private Players.Player[] players = new Players.Player[2];
         private bool isPvC = false;
-        private Board gameBoard;
+        public Board GameBoard { get; private set; }
         private readonly GameDifficulty gameDifficulty;
 
-        private int currentPlayer;
         private bool playerActed = false;
     }
 

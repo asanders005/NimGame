@@ -24,17 +24,17 @@
                 <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
                     <HorizontalStackLayout Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
                         <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                            <Label Text="Player1" FontSize="Medium" FontFamily="JotiOne" TextColor="Black"/>
+                            <Label Text="Player1" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" x:Name="Player1" />
                         </Frame>
                         <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
                             <Label Text="versus" FontSize="Small" FontFamily="JotiOne" TextColor="Black"/>
                         </Frame>
                         <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                            <Label Text="Player2" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" />
+                            <Label Text="Player2" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" x:Name="Player2" />
                         </Frame>
                     </HorizontalStackLayout>
                     <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                        <Label Text="Player's 1 Turn" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="JotiOne" />
+                        <Label Text="Player's 1 Turn" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="JotiOne" x:Name="CurrentPlayer" />
                     </Frame>
                 </VerticalStackLayout>
             </Frame>
@@ -62,16 +62,22 @@
                                 <ColumnDefinition Width="55" />
                             </Grid.ColumnDefinitions>
                             <!-- Pyramid Boxes -->
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="0" Grid.Column="3" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="2" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="4" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="3" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="5" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="0" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="2" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="4" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="6" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="0" Grid.Column="3" x:Name="row1col1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="2" x:Name="row2col1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="3" x:Name="row2col2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="4" x:Name="row2col3" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" x:Name="row3col1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="2" x:Name="row3col2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="3" x:Name="row3col3" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="4" x:Name="row3col4" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="5" x:Name="row3col5" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="0" x:Name="row4col1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="1" x:Name="row4col2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="2" x:Name="row4col3" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="3" x:Name="row4col4" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="4" x:Name="row4col5" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="5" x:Name="row4col6" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="6" x:Name="row4col7" />
                         </Grid>
                     </Grid>
 

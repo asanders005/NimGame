@@ -10,17 +10,20 @@ namespace NimGame.GameClasses.Players
     {
         public string PlayerName { get; protected set; }
 
-        public Player(string playerName)
+        public Player(string playerName, Game game)
         {
             PlayerName = playerName;
+            this.game = game;
         }
 
-        virtual public void TakeTurn(ref Board board) { }
+        virtual public void TakeTurn() { }
+
+        protected Game game;
     }
 
     public class CPU : Player
     {
-        public CPU(CPUDifficulty cpu_difficulty) : base("CPU") 
+        public CPU(CPUDifficulty cpu_difficulty, Game game) : base("CPU", game) 
         {
             difficulty = cpu_difficulty;
 
@@ -41,7 +44,7 @@ namespace NimGame.GameClasses.Players
             }
         }
 
-        override public void TakeTurn(ref Board board)
+        override public void TakeTurn()
         {
             int targetRow = 0;
             int targetNumber = 0;
@@ -50,16 +53,16 @@ namespace NimGame.GameClasses.Players
                 case CPUDifficulty.EASY:
                     do
                     {
-                        targetRow = rand.Next(board.Rows.Length);
-                    } while (board.Rows[targetRow] == 0);
+                        targetRow = rand.Next(game.GameBoard.Rows.Length);
+                    } while (game.GameBoard.Rows[targetRow] == 0);
                     targetNumber = rand.Next(4);
                     for (int i = 0; i < targetNumber; i++)
                     {
-                        board.UpdateRow(targetRow);
+                        game.GameBoard.UpdateRow(targetRow);
                     }
                     break;
                 case CPUDifficulty.MEDIUM:
-                    foreach (var rowCount in board.Rows)
+                    foreach (var rowCount in game.GameBoard.Rows)
                     {
                         if ((rowCount & 0b0001) != 0)
                         {
@@ -92,38 +95,38 @@ namespace NimGame.GameClasses.Players
                     }
                     do
                     {
-                        targetRow = rand.Next(board.Rows.Length);
-                    } while (board.Rows[targetRow] == 0);
+                        targetRow = rand.Next(game.GameBoard.Rows.Length);
+                    } while (game.GameBoard.Rows[targetRow] == 0);
                     if (nimSumAchievable)
                     {
                         for(int i = 0; i < targetNumber; i++)
                         {
-                            board.UpdateRow(targetRow);
+                            game.GameBoard.UpdateRow(targetRow);
                         }
                     }
                     else
                     {
-                        board.UpdateRow(targetRow);
+                        game.GameBoard.UpdateRow(targetRow);
                     }
                     break;
                 case CPUDifficulty.HARD:
-                    if (CheckWinningPosition(board.Rows))
+                    if (CheckWinningPosition(game.GameBoard.Rows))
                     {
                         do
                         {
-                            targetRow = rand.Next(board.Rows.Length);
+                            targetRow = rand.Next(game.GameBoard.Rows.Length);
                         }
-                        while (board.Rows[targetRow] == 0);
-                        board.UpdateRow(targetRow);
+                        while (game.GameBoard.Rows[targetRow] == 0);
+                        game.GameBoard.UpdateRow(targetRow);
                     }
                     else
                     {
                         bool winningPos = false;
                         while (!winningPos)
                         {
-                            int[] tempRows = board.Rows;
-                            targetRow %= board.Rows.Length;
-                            while (board.Rows[targetRow] == 0) targetRow = (targetRow + 1) % board.Rows.Length;
+                            int[] tempRows = game.GameBoard.Rows;
+                            targetRow %= game.GameBoard.Rows.Length;
+                            while (game.GameBoard.Rows[targetRow] == 0) targetRow = (targetRow + 1) % game.GameBoard.Rows.Length;
 
                             int tempCount = tempRows[targetRow];
                             while (!CheckWinningPosition(tempRows) && tempRows[targetRow] != 0) tempRows[targetRow]--;
@@ -131,7 +134,7 @@ namespace NimGame.GameClasses.Players
                             if (!CheckWinningPosition(tempRows)) tempRows[targetRow] = tempCount;
                             else
                             {
-                                board.UpdateRow(targetRow, tempRows[targetRow]);
+                                game.GameBoard.UpdateRow(targetRow, tempRows[targetRow]);
                                 winningPos = true;
                             }
                         }
