@@ -43,12 +43,15 @@ namespace NimGame.GameClasses.Players
 
         override public void TakeTurn(ref Board board)
         {
-            int targetRow = -1;
+            int targetRow = 0;
             int targetNumber = 0;
             switch (difficulty)
             {
                 case CPUDifficulty.EASY:
-                    targetRow = rand.Next(board.Rows.Length);
+                    do
+                    {
+                        targetRow = rand.Next(board.Rows.Length);
+                    } while (board.Rows[targetRow] == 0);
                     targetNumber = rand.Next(4);
                     for (int i = 0; i < targetNumber; i++)
                     {
@@ -87,7 +90,10 @@ namespace NimGame.GameClasses.Players
                             nimSumAchievable = false;
                         }
                     }
-                    targetRow = rand.Next(board.Rows.Length);
+                    do
+                    {
+                        targetRow = rand.Next(board.Rows.Length);
+                    } while (board.Rows[targetRow] == 0);
                     if (nimSumAchievable)
                     {
                         for(int i = 0; i < targetNumber; i++)
@@ -101,39 +107,60 @@ namespace NimGame.GameClasses.Players
                     }
                     break;
                 case CPUDifficulty.HARD:
-                    foreach (var rowCount in board.Rows) 
+                    if (CheckWinningPosition(board.Rows))
                     {
-                        if ((rowCount & 0b0001) != 0)
+                        do
                         {
-                            nimSumCounts[3]++;
+                            targetRow = rand.Next(board.Rows.Length);
                         }
-                        if ((rowCount & 0b0010) != 0)
-                        {
-                            nimSumCounts[2]++;
-                        }
-                        if ((rowCount & 0b0100) != 0)
-                        {
-                            nimSumCounts[1]++;
-                        }
-                        if ((rowCount & 0b1000) != 0)
-                        {
-                            nimSumCounts[0]++;
-                        }
+                        while (board.Rows[targetRow] == 0);
+                        board.UpdateRow(targetRow);
                     }
-                    for (int i = 0; i < nimSumCounts.Length; i++)
+                    else
                     {
-                        if (nimSumCounts[i] % 2 == 1 && !nimSumAchievable)
+                        bool winningPos = false;
+                        while (!winningPos)
                         {
-                            nimSumAchievable = true;
-                            targetNumber = (int)Math.Pow(2, i);
-                        }
-                        else
-                        {
-                            nimSumAchievable = false;
+                            int[] tempRows = board.Rows;
+                            targetRow %= board.Rows.Length;
+                            while (board.Rows[targetRow] == 0) targetRow = (targetRow + 1) % board.Rows.Length;
+
+                            int tempCount = tempRows[targetRow];
+                            while (!CheckWinningPosition(tempRows) && tempRows[targetRow] != 0) tempRows[targetRow]--;
+
+                            if (!CheckWinningPosition(tempRows)) tempRows[targetRow] = tempCount;
+                            else
+                            {
+                                board.UpdateRow(targetRow, tempRows[targetRow]);
+                                winningPos = true;
+                            }
                         }
                     }
                     break;
             }
+        }
+
+        private bool CheckWinningPosition(int[] rows)
+        {
+            bool match = false;
+            bool oneLeft = false;
+            switch (rows.Length)
+            {
+                case 3:
+                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    return match ^ oneLeft;
+                case 4:
+                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    return match ^ oneLeft;
+                case 5:
+                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    return match ^ oneLeft;
+            }
+
+            return false;
         }
 
         private CPUDifficulty difficulty;
