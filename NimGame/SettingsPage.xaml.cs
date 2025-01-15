@@ -10,6 +10,23 @@ public partial class SettingsPage : ContentPage
 		InitializeComponent();
 	}
 
+    private void ToggleButtonClicked(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        if (button != null)
+        {
+            // Toggle the button's state
+            if (button.BackgroundColor == Colors.Black)
+            {
+                button.BackgroundColor = Colors.Green;
+            }
+            else
+            {
+                button.BackgroundColor = Colors.Black;
+            }
+        }
+    }
+
     private void GamePage(object sender, EventArgs e)
     {
         if (Application.Current != null)

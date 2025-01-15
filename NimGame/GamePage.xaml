@@ -4,27 +4,97 @@
              x:Class="NimGame.GamePage"
              Title="GamePage">
 
-    <Grid BackgroundColor="White">
-        <VerticalStackLayout BackgroundColor="OrangeRed">
-            <Label 
-        TextColor="Black"
-        Text="Welcome to .NET MAUI!"
-        VerticalOptions="Center" 
-        HorizontalOptions="Center" />
-        </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
 
-        <VerticalStackLayout>
-            <Button Text="Title Page" Clicked="TitlePage" />
-            <Button Text="How to Play" Clicked="HowToPlay" />
-            <Button Text="Exit Game" Clicked ="ExitGame" />
-            <Button Text="New Game" Clicked="NewGame"/>
-            <Button Text="Pass Turn" Clicked="PassTurn" />
-            <Button Text="Row 1" Clicked="Row1" />
-            <Button Text="Row 2" Clicked="Row2" />
-            <Button Text="Row 3" Clicked="Row3" />
-            <Button Text="Row 4" Clicked="Row4" />
-            <Button Text="Row 5" Clicked="Row5" />
+            <!-- Top Section -->
+            <Frame BorderColor="Black" CornerRadius="10" Padding="10">
+                <Grid ColumnDefinitions="2*, Auto, Auto" RowDefinitions="Auto" ColumnSpacing="40" Padding="5">
+                    <Label Text="The Game of Nim" FontSize="45" FontFamily="JotiOne" Grid.Column="0" 
+                           VerticalOptions="Center" HorizontalOptions="Center" TextColor="DarkRed" />
+                    <Button Text="Main Menu" Grid.Column="1" Clicked="TitlePage" WidthRequest="120" Padding="10" 
+                            BackgroundColor="DarkGray" BorderWidth="4" BorderColor="Black" FontFamily="JotiOne"/>
+                    <Button Text="How to Play" Grid.Column="2" Clicked="HowToPlay" WidthRequest="120" Padding="10" 
+                            BackgroundColor="DarkGray" BorderWidth="4" BorderColor="Black" FontFamily="JotiOne"/>
+                </Grid>
+            </Frame>
+
+            <!-- Middle Section -->
+            <Frame BorderColor="Black" CornerRadius="10" Padding="10" BackgroundColor="IndianRed">
+                <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
+                            <Label Text="Player1" FontSize="Medium" FontFamily="JotiOne" TextColor="Black"/>
+                        </Frame>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
+                            <Label Text="versus" FontSize="Small" FontFamily="JotiOne" TextColor="Black"/>
+                        </Frame>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
+                            <Label Text="Player2" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" />
+                        </Frame>
+                    </HorizontalStackLayout>
+                    <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
+                        <Label Text="Player's 1 Turn" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="JotiOne" />
+                    </Frame>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Pyramid and Side Buttons Section -->
+            <Frame BorderColor="Black" CornerRadius="10" Padding="10">
+                <Grid ColumnDefinitions="2*, 1*" RowDefinitions="Auto">
+                    <!-- Pyramid Section -->
+                    <Grid Grid.Column="0" Padding="10" BackgroundColor="DarkRed">
+                        <Label Text="" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="JotiOne" />
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55" />
+                                <RowDefinition Height="55" />
+                                <RowDefinition Height="55" />
+                                <RowDefinition Height="55" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
+                            </Grid.ColumnDefinitions>
+                            <!-- Pyramid Boxes -->
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="0" Grid.Column="3" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="4" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="3" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="5" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="0" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="4" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="6" />
+                        </Grid>
+                    </Grid>
+
+                    <!-- Side Buttons -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center" HorizontalOptions="Center" BackgroundColor="LightGray" WidthRequest="190">
+                        <Button Text="Row 1" Clicked="Row1" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
+                                BorderColor="Black" FontFamily="JotiOne" />
+                        <Button Text="Row 2" Clicked="Row2" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
+                                BorderColor="Black" FontFamily="JotiOne" />
+                        <Button Text="Row 3" Clicked="Row3" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
+                                BorderColor="Black" FontFamily="JotiOne" />
+                        <Button Text="Row 4" Clicked="Row4" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
+                                BorderColor="Black" FontFamily="JotiOne" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Bottom Section -->
+            <Frame BorderColor="Black" CornerRadius="10" Padding="10">
+                <Button Text="PassTurn" HorizontalOptions="End" Clicked="PassTurn" BackgroundColor="LightGray" 
+                        TextColor="Black" FontAttributes="Bold" BorderWidth="5" BorderColor="Black" FontFamily="JotiOne" />
+            </Frame>
         </VerticalStackLayout>
-    </Grid>
+    </ScrollView>
 
 </ContentPage>
