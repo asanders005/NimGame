@@ -18,7 +18,7 @@ public partial class SettingsPage : ContentPage
             // Toggle the button's state
             if (button.BackgroundColor == Colors.Black)
             {
-                button.BackgroundColor = Colors.Green;
+                button.BackgroundColor = Colors.DarkGray;
             }
             else
             {
