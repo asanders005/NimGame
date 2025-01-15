@@ -32,7 +32,11 @@ namespace NimGame.GameClasses
 
             Random random = new Random();
             currentPlayer = random.Next(2);
-            players[currentPlayer].TakeTurn(ref gameBoard);
+            if (isPvC && currentPlayer == 1)
+            {
+                players[currentPlayer].TakeTurn(ref gameBoard);
+                SwitchPlayer();
+            }
         }
 
         public void UpdateBoard(int row)
@@ -51,6 +55,8 @@ namespace NimGame.GameClasses
                 if (isPvC && currentPlayer == 1)
                 {
                     players[1].TakeTurn(ref gameBoard);
+                    playerActed = true;
+                    SwitchPlayer();
                 }
             }
         }
