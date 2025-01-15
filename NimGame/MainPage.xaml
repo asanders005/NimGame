@@ -3,27 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:NimGame"
              x:Class="NimGame.MainPage"
-             Title="Main Canvas">
+             Title="Main Canvas"
+             BackgroundColor="DarkRed">
 
-    <Grid BackgroundColor="White">
-        
-        <GraphicsView x:Name="GameBoard" 
-                      BackgroundColor="AliceBlue"
-                      WidthRequest="500"
-                      HeightRequest="500"
-                      HorizontalOptions="Center"
-                      VerticalOptions="Center">
-        </GraphicsView>
+    <!-- Main Layout -->
+    <Grid RowDefinitions="Auto, *, Auto" ColumnDefinitions="*, Auto, *">
 
-        <VerticalStackLayout Spacing="40">
+        <!-- Black Box (Top) -->
+        <BoxView Grid.Row="0" Grid.ColumnSpan="3" BackgroundColor="Black" HeightRequest="50" />
 
-            <Button Text="Start Game" Clicked="SettingPage" />
-            <Button Text="How to Play" Clicked="HowToPlay" />
-            <Button Text="Exit Game" Clicked="ExitGame" />
-        </VerticalStackLayout>
+        <!-- Light Grey Boxes (Sides) -->
+        <BoxView Grid.Row="1" Grid.Column="0" BackgroundColor="LightGray" />
+        <BoxView Grid.Row="1" Grid.Column="2" BackgroundColor="LightGray" />
 
-        
+        <!-- Content Section -->
+        <Grid Grid.Row="1" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="600">
+            <VerticalStackLayout Padding="50" Spacing="30" HorizontalOptions="Fill" VerticalOptions="Center">
+
+                <!-- Title Section -->
+                <Frame BackgroundColor="IndianRed" BorderColor="Black" CornerRadius="15" Padding="20" HorizontalOptions="Center" WidthRequest="405">
+                    <Label Text="Game of Nim" FontFamily="JotiOne" FontSize="Large" TextColor="Black" HorizontalOptions="Center" />
+                </Frame>
+
+                <!-- Image Section -->
+                <Frame BackgroundColor="White" BorderColor="Black" CornerRadius="15" Padding="10" HorizontalOptions="Center" WidthRequest="405" HeightRequest="100">
+                    <Image Source="pirates.jpg" Aspect="AspectFill" />
+                </Frame>
+
+                <!-- Buttons Section -->
+                <VerticalStackLayout Spacing="20" HorizontalOptions="Center" WidthRequest="405">
+                    <Button Text="Start Game" 
+                            FontFamily="JotiOne" 
+                            FontSize="Medium" 
+                            BackgroundColor="Gold" 
+                            TextColor="Black" 
+                            BorderWidth="5" 
+                            BorderColor="Black" 
+                            CornerRadius="10" 
+                            Clicked="SettingPage" />
+
+                    <Button Text="How to Play" 
+                            FontFamily="JotiOne" 
+                            FontSize="Medium" 
+                            BackgroundColor="Gold" 
+                            TextColor="Black" 
+                            BorderWidth="5" 
+                            BorderColor="Black" 
+                            CornerRadius="10" 
+                            Clicked="HowToPlay" />
+
+                    <Button Text="Exit Game" 
+                            FontFamily="JotiOne" 
+                            FontSize="Medium" 
+                            BackgroundColor="Gold" 
+                            TextColor="Black" 
+                            BorderWidth="5" 
+                            BorderColor="Black" 
+                            CornerRadius="10" 
+                            Clicked="ExitGame" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Black Box (Bottom) -->
+        <BoxView Grid.Row="2" Grid.ColumnSpan="3" BackgroundColor="Black" HeightRequest="50" />
     </Grid>
-
-
 </ContentPage>

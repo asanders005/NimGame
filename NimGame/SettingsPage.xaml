@@ -3,28 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NimGame.SettingsPage"
              Title="SettingsPage"
-             BackgroundColor="Wheat">
-    <Grid BackgroundColor="White">
-        <VerticalStackLayout BackgroundColor="ForestGreen">
-            <Label 
-            TextColor="Black"
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             BackgroundColor="DarkRed">
+
+    <Grid Padding="20" RowSpacing="10" ColumnSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Title -->
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+               Text="The Game of Nim"
+               FontFamily="JotiOne"
+               FontSize="32"
+               HorizontalTextAlignment="Center"
+               TextColor="White"
+               BackgroundColor="Black"
+               Padding="10"/>
+
+        <!-- Game Mode -->
+        <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="10" BackgroundColor="Gray" Padding="10">
+            <Label Text="Game Mode" FontFamily="JotiOne" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
+            <Button Text="Player vs. Player" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="PvPButton" Clicked="ToggleButtonClicked"/>
+            <Button Text="Player vs. AI" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="PvAIButton" Clicked="ToggleButtonClicked"/>
         </VerticalStackLayout>
 
-
-        <VerticalStackLayout Spacing="40">
-
-            <Button Text="Player versus Player" Clicked="PlayerVersusPlayer" />
-            <Button Text="Player versus AI" Clicked="PlayerVersusAI" />
-            <Button Text="Easy" Clicked="Easy" />
-            <Button Text="Medium" Clicked="Medium" />
-            <Button Text="Hard" Clicked="Hard" />
-            
-            <Button Text="Play Game" Clicked="GamePage" />
-
+        <!-- Game Difficulty -->
+        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10" BackgroundColor="Gray" Padding="10">
+            <Label Text="Game Difficulty" FontFamily="JotiOne" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
+            <Button Text="Easy" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="EasyButton" Clicked="ToggleButtonClicked"/>
+            <Button Text="Normal" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="NormalButton" Clicked="ToggleButtonClicked"/>
+            <Button Text="Hard" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="HardButton" Clicked="ToggleButtonClicked"/>
         </VerticalStackLayout>
 
+        <!-- Enter Name -->
+        <VerticalStackLayout Grid.Row="1" Grid.Column="2" Spacing="10" BackgroundColor="Gray" Padding="10">
+            <Label Text="Enter Your Name(s)" FontFamily="JotiOne" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
+            <Entry Placeholder="Bob the Pirate" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" Text="{Binding PlayerName1}"/>
+            <Entry Placeholder="AI Player" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" Text="{Binding PlayerName2}"/>
+        </VerticalStackLayout>
+
+        <!-- Footer -->
+        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Spacing="10" HorizontalOptions="Center">
+            <Label Text="Click When Ready" FontFamily="JotiOne" FontSize="20" TextColor="Gold" HorizontalTextAlignment="Center"/>
+            <Button Text="Confirm" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" FontSize="20" Clicked="GamePage"/>
+        </HorizontalStackLayout>
     </Grid>
 </ContentPage>
