@@ -24,17 +24,18 @@
                 <VerticalStackLayout Spacing="20" HorizontalOptions="Center">
                     <HorizontalStackLayout Spacing="5" HorizontalOptions="Center" VerticalOptions="Center">
                         <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                            <Label Text="Player1" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" x:Name="Player1" />
+
+                            <Label Text="" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" x:Name="Player1Name" />
                         </Frame>
                         <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                            <Label Text="versus" FontSize="Small" FontFamily="JotiOne" TextColor="Black"/>
+                            <Label Text="versus" FontSize="Small" FontFamily="JotiOne" TextColor="Black" />
                         </Frame>
                         <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                            <Label Text="Player2" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" x:Name="Player2" />
+                            <Label Text="" FontSize="Medium" FontFamily="JotiOne" TextColor="Black" x:Name="Player2Name"  />
                         </Frame>
                     </HorizontalStackLayout>
                     <Frame BorderColor="Black" CornerRadius="5" Padding="5" BackgroundColor="LightGray">
-                        <Label Text="Player's 1 Turn" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="JotiOne" x:Name="CurrentPlayer" />
+                        <Label Text="" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="Center" FontFamily="JotiOne" x:Name="CurrentPlayerName" />
                     </Frame>
                 </VerticalStackLayout>
             </Frame>
@@ -61,6 +62,7 @@
                                 <ColumnDefinition Width="55" />
                                 <ColumnDefinition Width="55" />
                             </Grid.ColumnDefinitions>
+                            
                             <!-- Pyramid Boxes -->
                             <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="0" Grid.Column="3" x:Name="row1col1" />
                             <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="2" x:Name="row2col1" />
