@@ -42,6 +42,21 @@ namespace NimGame.GameClasses
                 SwitchPlayer();
             }
         }
+        
+        public Game(Game other)
+        {
+            this.gameDifficulty = other.gameDifficulty;
+            this.Players = other.Players;
+            isPvC = other.isPvC;
+            Random random = new Random();
+            CurrentPlayer = random.Next(2);
+            if (isPvC && CurrentPlayer == 1)
+            {
+                Players[CurrentPlayer].TakeTurn();
+                playerActed = true;
+                SwitchPlayer();
+            }
+        }
 
         public bool UpdateBoard(int row)
         {
@@ -50,7 +65,6 @@ namespace NimGame.GameClasses
                 if (GameBoard.UpdateRow(row))
                 {
                     playerActed = true;
-                    CheckWinner();
                     return true;
                 }
             }
@@ -59,6 +73,7 @@ namespace NimGame.GameClasses
 
         public void SwitchPlayer()
         {
+            CheckWinner();
             if (!GameOver)
             {
                 if (playerActed)
@@ -129,7 +144,6 @@ namespace NimGame.GameClasses
             {
                 selectedRow = row;
                 Rows[row]--;
-                Console.WriteLine($"Row {row} has {Rows[row]} stones remaining");
                 return true;
             }
 

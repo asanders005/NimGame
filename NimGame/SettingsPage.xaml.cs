@@ -89,15 +89,27 @@ public partial class SettingsPage : ContentPage
             }
 
             // Determine if it's Player vs. AI or Player vs. Player
-            bool isPvC = (FindByName("PvAIButton") as Button)?.BackgroundColor == Colors.Gray;
+            bool isPvC = (FindByName("PvAIButton") as Button)?.BackgroundColor == Colors.Green;
 
             // Set CPU difficulty (you can extend this logic if needed)
-            GameClasses.Players.CPUDifficulty cpuDifficulty = GameClasses.Players.CPUDifficulty.MEDIUM;
+            //int tempDifficulty = (int)selectedDifficulty;
+            GameClasses.Players.CPUDifficulty cpuDifficulty = GameClasses.Players.CPUDifficulty.EASY;
 
             // Create the Game instance
             Game game = new Game(selectedDifficulty, player1Name, player2Name, isPvC ,cpuDifficulty);
 
-            Application.Current.MainPage = new GamePage(game);
+            switch (selectedDifficulty)
+            {
+                case GameDifficulty.EASY:
+                    Application.Current.MainPage = new GamePageEasy(game);
+                    break;
+                case GameDifficulty.MEDIUM:
+                    Application.Current.MainPage = new GamePageMedium(game);
+                    break;
+                case GameDifficulty.HARD:
+                    Application.Current.MainPage = new GamePageHard(game);
+                    break;
+            }
         }
     }
     
@@ -161,7 +173,7 @@ public partial class SettingsPage : ContentPage
         if (player2Entry != null)
         {
             player2Entry.IsEnabled = false; // Disable input
-            player2Entry.Text = "Player 2 (AI)";
+            player2Entry.Text = "Player 2 (CPU)";
             player2Entry.BackgroundColor = Colors.LightGray; // Grey out visually
         }
     }

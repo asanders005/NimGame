@@ -63,7 +63,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="GamePage.xaml">
+	  <Compile Update="GamePageEasy.xaml.cs">
+	    <DependentUpon>GamePageEasy.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="GamePageHard.xaml.cs">
+	    <DependentUpon>GamePageHard.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="GamePageMedium.xaml.cs">
+	    <DependentUpon>GamePageMedium.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="GamePageEasy.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="GamePageHard.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="GamePageMedium.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="HowToPlay.xaml">

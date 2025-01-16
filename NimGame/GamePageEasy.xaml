@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NimGame.GamePage"
+             x:Class="NimGame.GamePageEasy"
              Title="GamePage">
 
     <ScrollView>
@@ -64,22 +64,17 @@
                             </Grid.ColumnDefinitions>
                             
                             <!-- Pyramid Boxes -->
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="0" Grid.Column="3" x:Name="row1col1" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="2" x:Name="row2col1" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="3" x:Name="row2col2" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="4" x:Name="row2col3" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" x:Name="row3col1" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="2" x:Name="row3col2" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="3" x:Name="row3col3" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="4" x:Name="row3col4" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="5" x:Name="row3col5" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="0" x:Name="row4col1" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="1" x:Name="row4col2" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="2" x:Name="row4col3" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="3" x:Name="row4col4" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="4" x:Name="row4col5" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="5" x:Name="row4col6" />
-                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="3" Grid.Column="6" x:Name="row4col7" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="0" Grid.Column="2" x:Name="row1col1" />
+                            
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="1" x:Name="row2col1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="2" x:Name="row2col2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="1" Grid.Column="3" x:Name="row2col3" />
+
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="0" x:Name="row3col1" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="1" x:Name="row3col2" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="2" x:Name="row3col3" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="3" x:Name="row3col4" />
+                            <Frame BorderColor="Black" CornerRadius="5" Padding="15" BackgroundColor="LightGray" Grid.Row="2" Grid.Column="4" x:Name="row3col5" />
                         </Grid>
                     </Grid>
 
@@ -90,8 +85,6 @@
                         <Button Text="Row 2" Clicked="Row2" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
                                 BorderColor="Black" FontFamily="JotiOne" />
                         <Button Text="Row 3" Clicked="Row3" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
-                                BorderColor="Black" FontFamily="JotiOne" />
-                        <Button Text="Row 4" Clicked="Row4" TextColor="Gold" BackgroundColor="DarkRed" BorderWidth="5" 
                                 BorderColor="Black" FontFamily="JotiOne" />
                     </VerticalStackLayout>
                 </Grid>

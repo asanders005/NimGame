@@ -27,21 +27,21 @@ namespace NimGame.GameClasses.Players
         {
             difficulty = cpu_difficulty;
 
-            switch (difficulty)
-            {
-                case CPUDifficulty.EASY:
-                    PlayerName = "Easy CPU";
-                    break;
-                case CPUDifficulty.MEDIUM:
-                    PlayerName = "Medium CPU";
-                    break;
-                case CPUDifficulty.HARD:
-                    PlayerName = "Hard CPU";
-                    break;
-                default:
-                    PlayerName = "CPU";
-                    break;
-            }
+            //switch (difficulty)
+            //{
+            //    case CPUDifficulty.EASY:
+            //        PlayerName = "Easy CPU";
+            //        break;
+            //    case CPUDifficulty.MEDIUM:
+            //        PlayerName = "Medium CPU";
+            //        break;
+            //    case CPUDifficulty.HARD:
+            //        PlayerName = "Hard CPU";
+            //        break;
+            //    default:
+            //        PlayerName = "CPU";
+            //        break;
+            //}
         }
 
         override public void TakeTurn()
@@ -124,7 +124,8 @@ namespace NimGame.GameClasses.Players
                         else
                         {
                             bool winningPos = false;
-                            while (!winningPos)
+                            int limit = 0;
+                            while (!winningPos && limit < 5)
                             {
                                 int[] tempRows = game.GameBoard.Rows;
                                 targetRow %= game.GameBoard.Rows.Length;
@@ -139,6 +140,15 @@ namespace NimGame.GameClasses.Players
                                     game.GameBoard.UpdateRow(targetRow, tempRows[targetRow]);
                                     winningPos = true;
                                 }
+                            }
+                            if (limit == 5)
+                            {
+                                do
+                                {
+                                    targetRow = rand.Next(game.GameBoard.Rows.Length);
+                                }
+                                while (game.GameBoard.Rows[targetRow] == 0);
+                                game.GameBoard.UpdateRow(targetRow);
                             }
                         }
                         break;
@@ -158,12 +168,12 @@ namespace NimGame.GameClasses.Players
                     oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
                     return match ^ oneLeft;
                 case 4:
-                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
-                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    match = (rows[0] ^ rows[1] ^ rows[2] ^ rows[3]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2] | rows[3]) == 1;
                     return match ^ oneLeft;
                 case 5:
-                    match = (rows[0] ^ rows[1] ^ rows[2]) == 0;
-                    oneLeft = (rows[0] | rows[1] | rows[2]) == 1;
+                    match = (rows[0] ^ rows[1] ^ rows[2] ^ rows[3] ^ rows[4]) == 0;
+                    oneLeft = (rows[0] | rows[1] | rows[2] | rows[3] | rows[4]) == 1;
                     return match ^ oneLeft;
             }
 
@@ -179,7 +189,7 @@ namespace NimGame.GameClasses.Players
 
     public enum CPUDifficulty
     {
-        EASY,
+        EASY = 3,
         MEDIUM,
         HARD
     }
