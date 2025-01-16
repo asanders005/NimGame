@@ -89,6 +89,15 @@ namespace NimGame.GameClasses
             return false;
         }
 
+        public string GetPlayerName(int player)
+        {
+            return players[player].PlayerName;
+        }
+        public string GetCurrentPlayerName()
+        {
+            return players[currentPlayer].PlayerName;
+        }
+
         private bool isPvC = false;
         public Board GameBoard { get; private set; }
         private readonly GameDifficulty gameDifficulty;
