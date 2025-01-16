@@ -6,15 +6,42 @@ public partial class GamePage : ContentPage
 	public GamePage()
 	{
 		InitializeComponent();
+   
+  }
+  public GamePage(Game game)
+    {
+        InitializeComponent();
 
-        rows.Add(new List<Frame> { this.row1col1 });
-        rows.Add(new List<Frame> { this.row2col1, this.row2col2, this.row2col3 });
-        rows.Add(new List<Frame> { this.row3col1, this.row3col2, this.row3col3, this.row3col4, this.row3col5 });
-        rows.Add(new List<Frame> { this.row4col1, this.row4col2, this.row4col3, this.row4col4, this.row4col5, this.row4col6, this.row4col7 });
+        this.game = game;
 
-        player1 = this.Player1;
-        player2 = this.Player2;
-        currentPlayer = this.CurrentPlayer;
+        var row1col1 = FindByName("row1col1") as Frame;
+
+        var row2col1 = FindByName("row2col1") as Frame;
+        var row2col2 = FindByName("row2col2") as Frame;
+        var row2col3 = FindByName("row2col3") as Frame;
+
+        var row3col1 = FindByName("row3col1") as Frame;
+        var row3col2 = FindByName("row3col2") as Frame;
+        var row3col3 = FindByName("row3col3") as Frame;
+        var row3col4 = FindByName("row3col4") as Frame;
+        var row3col5 = FindByName("row3col5") as Frame;
+
+        var row4col1 = FindByName("row4col1") as Frame;
+        var row4col2 = FindByName("row4col2") as Frame;
+        var row4col3 = FindByName("row4col3") as Frame;
+        var row4col4 = FindByName("row4col4") as Frame;
+        var row4col5 = FindByName("row4col5") as Frame;
+        var row4col6 = FindByName("row4col6") as Frame;
+        var row4col7 = FindByName("row4col7") as Frame;
+
+        rows.Add(new List<Frame> { row1col1 });
+        rows.Add(new List<Frame> { row2col1, row2col2, row2col3 });
+        rows.Add(new List<Frame> { row3col1, row3col2, row3col3, row3col4, row3col5 });
+        rows.Add(new List<Frame> { row4col1, row4col2, row4col3, row4col4, row4col5, row4col6, row4col7 });
+
+        player1 = FindByName("Player1Name") as Label;
+        player2 = FindByName("Player2Name") as Label;
+        currentPlayer = FindByName("CurrentPlayerName") as Label;
 
         game = new Game(GameDifficulty.MEDIUM, "Hi", isPvC: true);
 
@@ -48,15 +75,18 @@ public partial class GamePage : ContentPage
     }
     private void NewGame(object sender, EventArgs e)
     {
-        game = new Game(GameDifficulty.MEDIUM, "HI");
+
+        this.game = new Game(GameDifficulty.MEDIUM, "HI");
     }
 
     private void ExitGame(object sender, EventArgs e)
     {
+        App.Current.Quit();
     }
 
     private void PassTurn(object sender, EventArgs e)
     {
+
         if (!game.GameOver)
         {
             game.SwitchPlayer();
@@ -130,6 +160,12 @@ public partial class GamePage : ContentPage
 
     private void Row4(object sender, EventArgs e)
     {
+
+        this.game.UpdateBoard(3);
+    }
+
+    private void Row5(object sender, EventArgs e)
+    {
         if (game.UpdateBoard(3))
         {
             for (int i = rows[3].Count - 1; i >= 0; i--)
@@ -144,7 +180,6 @@ public partial class GamePage : ContentPage
     }
 
     private Game game;
-
     private Label player1;
     private Label player2;
     private Label currentPlayer;
