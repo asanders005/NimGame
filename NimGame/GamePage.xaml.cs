@@ -7,29 +7,6 @@ public partial class GamePage : ContentPage
 	{
 		InitializeComponent();
    
-    rows.Add(new List<Frame> { this.row1col1 });
-    rows.Add(new List<Frame> { this.row2col1, this.row2col2, this.row2col3 });
-    rows.Add(new List<Frame> { this.row3col1, this.row3col2, this.row3col3, this.row3col4, this.row3col5 });
-    rows.Add(new List<Frame> { this.row4col1, this.row4col2, this.row4col3, this.row4col4, this.row4col5, this.row4col6, this.row4col7 });
-
-    player1 = this.Player1;
-    player2 = this.Player2;
-    currentPlayer = this.CurrentPlayer;
-
-    game = new Game(GameDifficulty.MEDIUM, "Hi", isPvC: true);
-
-    player1.Text = game.Players[0].PlayerName;
-    player2.Text = game.Players[1].PlayerName;
-    currentPlayer.Text = $"{game.Players[game.CurrentPlayer].PlayerName}'s Turn";
-
-    int[] rowCounts = game.GameBoard.Rows;
-    for (int i = 0; i < rowCounts.Length; i++)
-        {
-            for (int k = rows[i].Count - 1; k >= rowCounts[i]; k--)
-            {
-                if (rows[i][k].IsVisible) rows[i][k].IsVisible = false;
-            }
-        }
   }
   public GamePage(Game game)
     {
@@ -37,22 +14,48 @@ public partial class GamePage : ContentPage
 
         this.game = game;
 
-        var player1Label = FindByName("Player1Name") as Label;
-        if (player1Label != null)
-        {
-            player1Label.Text = this.game.GetPlayerName(0);
-        }
+        var row1col1 = FindByName("row1col1") as Frame;
 
-        var player2Label = FindByName("Player2Name") as Label;
-        if (player2Label != null)
-        {
-            player2Label.Text = this.game.GetPlayerName(1);
-        }
+        var row2col1 = FindByName("row2col1") as Frame;
+        var row2col2 = FindByName("row2col2") as Frame;
+        var row2col3 = FindByName("row2col3") as Frame;
 
-        var currentPlayerLabel = FindByName("CurrentPlayerName") as Label;
-        if (currentPlayerLabel != null)
+        var row3col1 = FindByName("row3col1") as Frame;
+        var row3col2 = FindByName("row3col2") as Frame;
+        var row3col3 = FindByName("row3col3") as Frame;
+        var row3col4 = FindByName("row3col4") as Frame;
+        var row3col5 = FindByName("row3col5") as Frame;
+
+        var row4col1 = FindByName("row4col1") as Frame;
+        var row4col2 = FindByName("row4col2") as Frame;
+        var row4col3 = FindByName("row4col3") as Frame;
+        var row4col4 = FindByName("row4col4") as Frame;
+        var row4col5 = FindByName("row4col5") as Frame;
+        var row4col6 = FindByName("row4col6") as Frame;
+        var row4col7 = FindByName("row4col7") as Frame;
+
+        rows.Add(new List<Frame> { row1col1 });
+        rows.Add(new List<Frame> { row2col1, row2col2, row2col3 });
+        rows.Add(new List<Frame> { row3col1, row3col2, row3col3, row3col4, row3col5 });
+        rows.Add(new List<Frame> { row4col1, row4col2, row4col3, row4col4, row4col5, row4col6, row4col7 });
+
+        player1 = FindByName("Player1Name") as Label;
+        player2 = FindByName("Player2Name") as Label;
+        currentPlayer = FindByName("CurrentPlayerName") as Label;
+
+        game = new Game(GameDifficulty.MEDIUM, "Hi", isPvC: true);
+
+        player1.Text = game.Players[0].PlayerName;
+        player2.Text = game.Players[1].PlayerName;
+        currentPlayer.Text = $"{game.Players[game.CurrentPlayer].PlayerName}'s Turn";
+
+        int[] rowCounts = game.GameBoard.Rows;
+        for (int i = 0; i < rowCounts.Length; i++)
         {
-            currentPlayerLabel.Text = this.game.GetCurrentPlayerName() + "'s Turn";
+            for (int k = rows[i].Count - 1; k >= rowCounts[i]; k--)
+            {
+                if (rows[i][k].IsVisible) rows[i][k].IsVisible = false;
+            }
         }
     }
 
@@ -94,12 +97,6 @@ public partial class GamePage : ContentPage
             }
         }
         currentPlayer.Text = $"{game.Players[game.CurrentPlayer].PlayerName}'s Turn";
-
-        var currentPlayerLabel = FindByName("CurrentPlayerName") as Label;
-        if (currentPlayerLabel != null)
-        {
-            currentPlayerLabel.Text = this.game.GetCurrentPlayerName() + "'s Turn";
-        }
     }
 
     private void Row1(object sender, EventArgs e)
