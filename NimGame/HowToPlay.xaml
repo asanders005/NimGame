@@ -46,9 +46,10 @@
 
         <!-- Image Section -->
         <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10">
-            <Image Source="row_selection.png" Aspect="AspectFit" HeightRequest="100"/>
-            <Image Source="coins_on_board.png" Aspect="AspectFit" HeightRequest="100"/>
-            <Image Source="player_turns.png" Aspect="AspectFit" HeightRequest="100"/>
+            <Image Source="playersturn.png" Aspect="AspectFit" HeightRequest="200"/>
+            
+            <Image Source="rowbutton_passbutton.png" Aspect="AspectFit" HeightRequest="200"/>
+            
         </VerticalStackLayout>
 
         <!-- Bottom Button -->

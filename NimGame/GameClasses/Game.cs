@@ -108,6 +108,8 @@ namespace NimGame.GameClasses
             return false;
         }
 
+        public bool getIsPvC() { return isPvC; }
+
         private bool isPvC = false;
         public Board GameBoard { get; private set; }
         private readonly GameDifficulty gameDifficulty;

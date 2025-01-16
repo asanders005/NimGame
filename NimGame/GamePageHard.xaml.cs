@@ -94,7 +94,11 @@ public partial class GamePageHard : ContentPage
     }
     private void NewGame(object sender, EventArgs e)
     {
-        this.game = new Game(game);
+        Game newgame = new Game(GameDifficulty.HARD, player1.Text, player2.Text, game.getIsPvC());
+
+        Application.Current.MainPage = new GamePageMedium(newgame);
+
+
     }
 
     private void ExitGame(object sender, EventArgs e)
