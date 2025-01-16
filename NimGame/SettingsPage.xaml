@@ -30,24 +30,24 @@
         <!-- Game Mode -->
         <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="10" BackgroundColor="Gray" Padding="10">
             <Label Text="Game Mode" FontFamily="JotiOne" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
-            <Button Text="Player vs. Player" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="PvPButton" Clicked="ToggleButtonClicked"/>
-            <Button Text="Player vs. AI" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="PvAIButton" Clicked="ToggleButtonClicked"/>
+            <Button Text="Player vs. Player" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="PvPButton" Clicked="PlayerVersusPlayer"/>
+            <Button Text="Player vs. AI" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="PvAIButton" Clicked="PlayerVersusAI" />
         </VerticalStackLayout>
 
         <!-- Game Difficulty -->
         <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="10" BackgroundColor="Gray" Padding="10">
             <Label Text="Game Difficulty" FontFamily="JotiOne" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
-            <Button Text="Easy" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="EasyButton" Clicked="ToggleButtonClicked"/>
-            <Button Text="Normal" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="NormalButton" Clicked="ToggleButtonClicked"/>
-            <Button Text="Hard" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="HardButton" Clicked="ToggleButtonClicked"/>
+            <Button Text="Easy" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="EasyButton"  Clicked="Easy" />
+            <Button Text="Normal" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="NormalButton"  Clicked="Medium" />
+            <Button Text="Hard" BackgroundColor="Black" TextColor="White" FontFamily="JotiOne" x:Name="HardButton"  Clicked="Hard"/>
         </VerticalStackLayout>
 
         <!-- Enter Name -->
         <VerticalStackLayout Grid.Row="1" Grid.Column="2" Spacing="10" BackgroundColor="Gray" Padding="10">
             <Label Text="Enter Your Name(s)" FontFamily="JotiOne" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
-            <Entry Placeholder="Bob the Pirate" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" Text="{Binding PlayerName1}"/>
-            <Entry Placeholder="AI Player" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" Text="{Binding PlayerName2}"/>
-        </VerticalStackLayout>
+            <Entry Placeholder="Bob the Pirate" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" x:Name="Player1Entry"  Text="{Binding PlayerName1}"/>
+            <Entry Placeholder="Joe the Buccaneer" FontFamily="JotiOne" BackgroundColor="Black" TextColor="White" x:Name="Player2Entry" Text="{Binding PlayerName2}"/>
+        </VerticalStackLayout> 
 
         <!-- Footer -->
         <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Spacing="10" HorizontalOptions="Center">
