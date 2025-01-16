@@ -15,7 +15,7 @@ namespace NimGame.GameClasses
         public Players.Player[] Players { get; private set; } = new Players.Player[2];
         public bool GameOver { get; private set; }
 
-        public Game(GameDifficulty difficulty, string player1Name, string player2Name = "CPU", bool isPvC = false, Players.CPUDifficulty cpu_difficulty = GameClasses.Players.CPUDifficulty.MEDIUM)
+        public Game(GameDifficulty difficulty, string player1Name, string player2Name = "CPU", bool isPvC = false)
         {
             Console.WriteLine("Creating Game");
 
@@ -26,7 +26,7 @@ namespace NimGame.GameClasses
             if (isPvC)
             {
                 this.isPvC = true;
-                Players[1] = new Players.CPU(cpu_difficulty, this);
+                Players[1] = new Players.CPU(this);
             }
             else
             {
@@ -46,8 +46,11 @@ namespace NimGame.GameClasses
         public Game(Game other)
         {
             this.gameDifficulty = other.gameDifficulty;
+            GameBoard = new Board((int)gameDifficulty);
+
             this.Players = other.Players;
             isPvC = other.isPvC;
+
             Random random = new Random();
             CurrentPlayer = random.Next(2);
             if (isPvC && CurrentPlayer == 1)

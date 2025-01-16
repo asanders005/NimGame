@@ -91,12 +91,8 @@ public partial class SettingsPage : ContentPage
             // Determine if it's Player vs. AI or Player vs. Player
             bool isPvC = (FindByName("PvAIButton") as Button)?.BackgroundColor == Colors.Green;
 
-            // Set CPU difficulty (you can extend this logic if needed)
-            //int tempDifficulty = (int)selectedDifficulty;
-            GameClasses.Players.CPUDifficulty cpuDifficulty = GameClasses.Players.CPUDifficulty.EASY;
-
             // Create the Game instance
-            Game game = new Game(selectedDifficulty, player1Name, player2Name, isPvC ,cpuDifficulty);
+            Game game = new Game(selectedDifficulty, player1Name, player2Name, isPvC);
 
             switch (selectedDifficulty)
             {
