@@ -38,6 +38,7 @@ namespace NimGame.GameClasses
             if (isPvC && CurrentPlayer == 1)
             {
                 Players[CurrentPlayer].TakeTurn();
+                playerActed = true;
                 SwitchPlayer();
             }
         }
@@ -49,10 +50,10 @@ namespace NimGame.GameClasses
                 if (GameBoard.UpdateRow(row))
                 {
                     playerActed = true;
+                    CheckWinner();
                     return true;
                 }
             }
-            CheckWinner();
             return false;
         }
 

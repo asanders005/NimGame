@@ -46,100 +46,104 @@ namespace NimGame.GameClasses.Players
 
         override public void TakeTurn()
         {
-            int targetRow = 0;
-            int targetNumber = 0;
-            switch (difficulty)
+            if (!game.GameOver)
             {
-                case CPUDifficulty.EASY:
-                    do
-                    {
-                        targetRow = rand.Next(game.GameBoard.Rows.Length);
-                    } while (game.GameBoard.Rows[targetRow] == 0);
-                    targetNumber = rand.Next(4);
-                    for (int i = 0; i < targetNumber; i++)
-                    {
-                        game.GameBoard.UpdateRow(targetRow);
-                    }
-                    break;
-                case CPUDifficulty.MEDIUM:
-                    foreach (var rowCount in game.GameBoard.Rows)
-                    {
-                        if ((rowCount & 0b0001) != 0)
-                        {
-                            nimSumCounts[3]++;
-                        }
-                        if ((rowCount & 0b0010) != 0)
-                        {
-                            nimSumCounts[2]++;
-                        }
-                        if ((rowCount & 0b0100) != 0)
-                        {
-                            nimSumCounts[1]++;
-                        }
-                        if ((rowCount & 0b1000) != 0)
-                        {
-                            nimSumCounts[0]++;
-                        }
-                    }
-                    for (int i = 0; i < nimSumCounts.Length; i++)
-                    {
-                        if (nimSumCounts[i] % 2 == 1 && !nimSumAchievable)
-                        {
-                            nimSumAchievable = true;
-                            targetNumber = (int)Math.Pow(2, i);
-                        }
-                        else
-                        {
-                            nimSumAchievable = false;
-                        }
-                    }
-                    do
-                    {
-                        targetRow = rand.Next(game.GameBoard.Rows.Length);
-                    } while (game.GameBoard.Rows[targetRow] == 0);
-                    if (nimSumAchievable)
-                    {
-                        for(int i = 0; i < targetNumber; i++)
-                        {
-                            game.GameBoard.UpdateRow(targetRow);
-                        }
-                    }
-                    else
-                    {
-                        game.GameBoard.UpdateRow(targetRow);
-                    }
-                    break;
-                case CPUDifficulty.HARD:
-                    if (CheckWinningPosition(game.GameBoard.Rows))
-                    {
+                int targetRow = 0;
+                int targetNumber = 0;
+                switch (difficulty)
+                {
+                    case CPUDifficulty.EASY:
                         do
                         {
                             targetRow = rand.Next(game.GameBoard.Rows.Length);
-                        }
-                        while (game.GameBoard.Rows[targetRow] == 0);
-                        game.GameBoard.UpdateRow(targetRow);
-                    }
-                    else
-                    {
-                        bool winningPos = false;
-                        while (!winningPos)
+                        } while (game.GameBoard.Rows[targetRow] == 0);
+                        targetNumber = rand.Next(4);
+                        for (int i = 0; i < targetNumber; i++)
                         {
-                            int[] tempRows = game.GameBoard.Rows;
-                            targetRow %= game.GameBoard.Rows.Length;
-                            while (game.GameBoard.Rows[targetRow] == 0) targetRow = (targetRow + 1) % game.GameBoard.Rows.Length;
-
-                            int tempCount = tempRows[targetRow];
-                            while (!CheckWinningPosition(tempRows) && tempRows[targetRow] != 0) tempRows[targetRow]--;
-
-                            if (!CheckWinningPosition(tempRows)) tempRows[targetRow] = tempCount;
-                            else
+                            game.GameBoard.UpdateRow(targetRow);
+                        }
+                        break;
+                    case CPUDifficulty.MEDIUM:
+                        foreach (var rowCount in game.GameBoard.Rows)
+                        {
+                            if ((rowCount & 0b0001) != 0)
                             {
-                                game.GameBoard.UpdateRow(targetRow, tempRows[targetRow]);
-                                winningPos = true;
+                                nimSumCounts[3]++;
+                            }
+                            if ((rowCount & 0b0010) != 0)
+                            {
+                                nimSumCounts[2]++;
+                            }
+                            if ((rowCount & 0b0100) != 0)
+                            {
+                                nimSumCounts[1]++;
+                            }
+                            if ((rowCount & 0b1000) != 0)
+                            {
+                                nimSumCounts[0]++;
                             }
                         }
-                    }
-                    break;
+                        for (int i = 0; i < nimSumCounts.Length; i++)
+                        {
+                            if (nimSumCounts[i] % 2 == 1 && !nimSumAchievable)
+                            {
+                                nimSumAchievable = true;
+                                targetNumber = (int)Math.Pow(2, i);
+                            }
+                            else
+                            {
+                                nimSumAchievable = false;
+                            }
+                        }
+                        do
+                        {
+                            targetRow = rand.Next(game.GameBoard.Rows.Length);
+                        } while (game.GameBoard.Rows[targetRow] == 0);
+                        if (nimSumAchievable)
+                        {
+                            for (int i = 0; i < targetNumber; i++)
+                            {
+                                game.GameBoard.UpdateRow(targetRow);
+                            }
+                        }
+                        else
+                        {
+                            game.GameBoard.UpdateRow(targetRow);
+                        }
+                        break;
+                    case CPUDifficulty.HARD:
+                        if (CheckWinningPosition(game.GameBoard.Rows))
+                        {
+                            do
+                            {
+                                targetRow = rand.Next(game.GameBoard.Rows.Length);
+                            }
+                            while (game.GameBoard.Rows[targetRow] == 0);
+                            game.GameBoard.UpdateRow(targetRow);
+                        }
+                        else
+                        {
+                            bool winningPos = false;
+                            while (!winningPos)
+                            {
+                                int[] tempRows = game.GameBoard.Rows;
+                                targetRow %= game.GameBoard.Rows.Length;
+                                while (game.GameBoard.Rows[targetRow] == 0) targetRow = (targetRow + 1) % game.GameBoard.Rows.Length;
+
+                                int tempCount = tempRows[targetRow];
+                                while (!CheckWinningPosition(tempRows) && tempRows[targetRow] != 0) tempRows[targetRow]--;
+
+                                if (!CheckWinningPosition(tempRows)) tempRows[targetRow] = tempCount;
+                                else
+                                {
+                                    game.GameBoard.UpdateRow(targetRow, tempRows[targetRow]);
+                                    winningPos = true;
+                                }
+                            }
+                        }
+                        break;
+                }
+                game.CheckWinner();
             }
         }
 

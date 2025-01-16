@@ -57,16 +57,30 @@ public partial class GamePage : ContentPage
 
     private void PassTurn(object sender, EventArgs e)
     {
-        game.SwitchPlayer();
-        int[] rowCounts = game.GameBoard.Rows;
-        for (int i = 0; i < rowCounts.Length; i++)
+        if (!game.GameOver)
         {
-            for (int k = rows[i].Count - 1; k >= rowCounts[i]; k--)
+            game.SwitchPlayer();
+            int[] rowCounts = game.GameBoard.Rows;
+            for (int i = 0; i < rowCounts.Length; i++)
             {
-                if (rows[i][k].IsVisible) rows[i][k].IsVisible = false;
+                for (int k = rows[i].Count - 1; k >= rowCounts[i]; k--)
+                {
+                    if (rows[i][k].IsVisible) rows[i][k].IsVisible = false;
+                }
+            }
+            if (game.GameOver)
+            {
+                currentPlayer.Text = $"{game.Winner} Wins!";
+            }
+            else
+            {
+                currentPlayer.Text = $"{game.Players[game.CurrentPlayer].PlayerName}'s Turn";
             }
         }
-        currentPlayer.Text = $"{game.Players[game.CurrentPlayer].PlayerName}'s Turn";
+        else
+        {
+            currentPlayer.Text = $"{game.Winner} Wins!";
+        }
     }
 
     private void Row1(object sender, EventArgs e)
