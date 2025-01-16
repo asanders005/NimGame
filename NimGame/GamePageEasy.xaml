@@ -92,8 +92,12 @@
 
             <!-- Bottom Section -->
             <Frame BorderColor="Black" CornerRadius="10" Padding="10">
-                <Button Text="PassTurn" HorizontalOptions="End" Clicked="PassTurn" BackgroundColor="LightGray" 
-                        TextColor="Black" FontAttributes="Bold" BorderWidth="5" BorderColor="Black" FontFamily="JotiOne" />
+                <Grid ColumnDefinitions="2*, 1*" RowDefinitions="Auto">
+                    <Button Grid.Column="1" WidthRequest="120" Text="PassTurn" HorizontalOptions="End" Clicked="PassTurn" BackgroundColor="LightGray" 
+        TextColor="Black" FontAttributes="Bold" BorderWidth="5" BorderColor="Black" FontFamily="JotiOne" />
+                    <Button Grid.Column="0" WidthRequest="120" Text="New Game" HorizontalOptions="End" Clicked="NewGame" BackgroundColor="LightGray" 
+        TextColor="Black" FontAttributes="Bold" BorderWidth="5" BorderColor="Black" FontFamily="JotiOne" />
+                </Grid>
             </Frame>
         </VerticalStackLayout>
     </ScrollView>

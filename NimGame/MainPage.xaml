@@ -25,8 +25,8 @@
                 </Frame>
 
                 <!-- Image Section -->
-                <Frame BackgroundColor="White" BorderColor="Black" CornerRadius="15" Padding="10" HorizontalOptions="Center" WidthRequest="405" HeightRequest="100">
-                    <Image Source="pirates.jpg" Aspect="AspectFill" />
+                <Frame BackgroundColor="DarkRed" BorderColor= "Black" CornerRadius="15" Padding="20" HorizontalOptions="Center" WidthRequest="405" HeightRequest="100">
+                    <Image Source="pirateimage.png" Aspect="AspectFit" Opacity="25" BackgroundColor="DarkRed"/>
                 </Frame>
 
                 <!-- Buttons Section -->
