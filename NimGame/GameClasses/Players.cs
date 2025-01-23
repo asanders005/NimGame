@@ -36,8 +36,8 @@ namespace NimGame.GameClasses.Players
                 {
                     targetRow = rand.Next(game.GameBoard.Rows.Length);
                 } while (game.GameBoard.Rows[targetRow] == 0);
-                targetNumber = rand.Next(4);
-                for (int i = 0; i < targetNumber; i++)
+                targetNumber = rand.Next(4) + 1;
+                for (int i = 0; i <= targetNumber; i++)
                 {
                     game.GameBoard.UpdateRow(targetRow);
                 }

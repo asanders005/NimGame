@@ -96,7 +96,7 @@ public partial class GamePageHard : ContentPage
     {
         Game newgame = new Game(GameDifficulty.HARD, player1.Text, player2.Text, game.getIsPvC());
 
-        Application.Current.MainPage = new GamePageMedium(newgame);
+        Application.Current.MainPage = new GamePageHard(newgame);
 
 
     }
