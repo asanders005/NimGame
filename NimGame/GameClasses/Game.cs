@@ -84,7 +84,6 @@ namespace NimGame.GameClasses
                     CurrentPlayer = (CurrentPlayer == 0) ? 1 : 0;
                     playerActed = false;
                     GameBoard.DeselectRow();
-                    Console.WriteLine("Passing Turn");
                     if (isPvC && CurrentPlayer == 1)
                     {
                         Players[1].TakeTurn();
@@ -100,7 +99,6 @@ namespace NimGame.GameClasses
             if (GameBoard.IsEmpty())
             {
                 Winner = (CurrentPlayer == 0) ? Players[1].PlayerName : Players[0].PlayerName;
-                Console.WriteLine($"{Winner} Wins!");
                 GameOver = true;
                 return true;
             }
@@ -122,61 +120,5 @@ namespace NimGame.GameClasses
         EASY = 3,
         MEDIUM,
         HARD
-    }
-
-    public class Board
-    {
-        public Board(int rowCount)
-        {
-            Rows = new int[rowCount];
-            int rowTotal = 1;
-            if (rowCount == 5)
-            {
-                rowTotal = 3;
-            }
-            for (int i = 0; i < rowCount; i++)
-            {
-                Rows[i] = rowTotal;
-                rowTotal += 2;
-            }
-        }
-
-        public bool UpdateRow(int row)
-        {
-            if (row + 1 > Rows.Length) return false;
-
-            if ((row == selectedRow || selectedRow == -1) && Rows[row] > 0)
-            {
-                selectedRow = row;
-                Rows[row]--;
-                return true;
-            }
-
-            return false;
-        }
-
-        public void UpdateRow(int row, int count)
-        {
-            if ((row == selectedRow || selectedRow == -1) && Rows[row] > 0 && count < Rows[row])
-            {
-                selectedRow = row;
-                Rows[row] = count;
-            }
-        }
-
-        public void DeselectRow() { selectedRow = -1; }
-
-        public bool IsEmpty()
-        {
-            foreach (var rowCount in Rows)
-            {
-                if (rowCount > 0) return false;
-            }
-
-            return true;
-        }
-
-        public int[] Rows { get; private set; }
-        private int selectedRow = -1;
     }
 }

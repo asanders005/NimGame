@@ -23,10 +23,7 @@ namespace NimGame.GameClasses.Players
 
     public class CPU : Player
     {
-        public CPU(Game game) : base("CPU", game) 
-        {
-            //
-        }
+        public CPU(Game game) : base("CPU", game) { }
 
         override public void TakeTurn()
         {
